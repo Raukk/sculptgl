@@ -6,7 +6,17 @@
   "author": "Stéphane GINIER",
   "license": "MIT",
   "main": "main.js",
-  "devDependencies": {
+  "dependencies" : 
+  {
+    "express" : "latest",          
+    "bcrypt-nodejs" : "latest",
+    "morgan": "latest",
+    "body-parser": "latest",
+    "method-override":"latest",
+    "express-session": "latest",
+	"serve-favicon":"latest",
+	"request":"latest",
+
     "babel-plugin-external-helpers": "^6.8.0",
     "babel-preset-es2015": "^6.14.0",
     "electron": "^1.3.5",
@@ -20,7 +30,12 @@
     "dev": "cp tools/index.dev.html app/index.html && cp tools/authSuccess.html app/authSuccess.html && rollup -cwm",
     "release": "rm -f app/sculptgl.js.map && cp tools/index.release.html app/index.html && cp tools/authSuccess.html app/authSuccess.html && rollup -c --environment release",
     "buildElectron": "npm run release && rm -rf standalone/app/ && cp -R app/ standalone/ && cp package.json standalone",
-    "standalone": "npm run buildElectron && cd standalone && node buildStandalone.js"
+    "standalone": "npm run buildElectron && cd standalone && node buildStandalone.js",
+	"dev-win": "copy /Y tools\\index.dev.html app\\index.html && copy /Y tools\\authSuccess.html app\\authSuccess.html && start rollup -cwm && node server.js",
+    "release-win": "copy /Y tools\\index.release.html app\\index.html && copy /Y tools\\authSuccess.html app\\authSuccess.html && rollup -c --environment release",
+    "buildElectron-win": "npm run release-win && robocopy app\\ standalone\\app\\ /e  && copy /Y package.json standalone\\",
+    "standalone-win": "npm run buildElectron-win && cd standalone && node buildStandalone.js",
+	"release-win-node": "npm run release-win && node server.js"
   },
   "repository": {
     "type": "git",
